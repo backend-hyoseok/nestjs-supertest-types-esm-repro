@@ -1,0 +1,44 @@
+[
+  {
+    "check": "original typecheck",
+    "command": "pnpm exec tsc --noEmit --incremental false -p tsconfig.json --pretty false",
+    "exitCode": 2,
+    "stdout": "test/app.e2e-spec.ts(4,21): error TS2307: Cannot find module 'supertest/types' or its corresponding type declarations.\n",
+    "stderr": ""
+  },
+  {
+    "check": "unit tests",
+    "command": "pnpm test",
+    "exitCode": 0,
+    "stdout": "\n RUN  v4.1.11 /Users/hyoseok/hyoseok/nestjs12-workspace/nestjs-supertest-types-esm-repro\n\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  14:15:07\n   Duration  342ms (transform 16ms, setup 0ms, import 183ms, tests 76ms, environment 0ms)\n\n",
+    "stderr": "$ vitest run\nThe plugin \"vite-tsconfig-paths\" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.\n"
+  },
+  {
+    "check": "e2e tests",
+    "command": "pnpm run test:e2e",
+    "exitCode": 0,
+    "stdout": "\n RUN  v4.1.11 /Users/hyoseok/hyoseok/nestjs12-workspace/nestjs-supertest-types-esm-repro\n\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  14:15:08\n   Duration  286ms (transform 18ms, setup 0ms, import 158ms, tests 51ms, environment 0ms)\n\n",
+    "stderr": "$ vitest run --config ./vitest.config.e2e.ts\nThe plugin \"vite-tsconfig-paths\" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.\n"
+  },
+  {
+    "check": "application build",
+    "command": "pnpm run build",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "$ nest build\n"
+  },
+  {
+    "check": "typecheck after adding .js",
+    "command": "pnpm exec tsc --noEmit --incremental false -p tsconfig.json --pretty false",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "check": "restored original typecheck",
+    "command": "pnpm exec tsc --noEmit --incremental false -p tsconfig.json --pretty false",
+    "exitCode": 2,
+    "stdout": "test/app.e2e-spec.ts(4,21): error TS2307: Cannot find module 'supertest/types' or its corresponding type declarations.\n",
+    "stderr": ""
+  }
+]
